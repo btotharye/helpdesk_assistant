@@ -12,9 +12,10 @@ import os
 
 snow_user = os.getenv("snow_user")
 snow_pw = os.getenv("snow_pw")
+snow_instance = os.getenv("snow_instance")
 
 def email_to_sysid(email):
-    lookup_url = 'https://dev79101.service-now.com/api/now/table/sys_user?sysparm_limit=1&email={}'.format(email)
+    lookup_url = 'https://{0}/api/now/table/sys_user?sysparm_limit=1&email={1}'.format(snow_instance,email)
     user = snow_user
     pwd = snow_pw
     # Set proper headers
@@ -26,7 +27,7 @@ def email_to_sysid(email):
     
 
 def create_incident(description, short_description, priority, caller):
-    incident_url = 'https://dev79101.service-now.com/api/now/table/incident'
+    incident_url = 'https://{}/api/now/table/incident'.format(snow_instance)
     user = snow_user
     pwd = snow_pw
     # Set proper headers
