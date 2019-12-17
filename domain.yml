@@ -11,11 +11,22 @@ intents:
     use_entities: []
 entities:
 - email
+- priority
 slots:
   email:
     type: unfeaturized
   requested_slot:
     type: unfeaturized
+  problem_description:
+    type: unfeaturized
+  incident_title:
+    type: unfeaturized
+  priority:
+    type: categorical
+    values:
+      - low
+      - medium
+      - high
 templates:
   utter_greet:
   - text: Hey! How are you?
@@ -32,6 +43,12 @@ templates:
   - text: I am a bot, powered by Rasa.
   utter_ask_email:
   - text: What is your email address to lookup for creating the ticket?
+  utter_ask_incident_title:
+  - text: What should we use for the title of this incident?
+  utter_ask_problem_description:
+  - text: Ok what is the problem description for the issue?
+  utter_ask_priority:
+  - text: Ok what should the priority be?  Low, medium, or high?
   utter_no_email:
   - text: Sorry that email isn't in our incident management system.
   utter_incident_opened:

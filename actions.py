@@ -31,14 +31,13 @@ def create_incident(description, short_description, priority, caller):
     pwd = snow_pw
     # Set proper headers
     headers = {"Content-Type":"application/json","Accept":"application/json"}
-    print(short_description)
     data = {
         'opened_by': caller,
         'short_description': short_description,
         'description': description,
-        'priority': priority,
+        'urgency': priority,
         'caller_id': caller,
-        'comments': 'just testing the comments'
+        'comments': description
     }
     response = requests.post(incident_url, auth=(user, pwd), headers=headers, data=json.dumps(data))
     return response
@@ -54,6 +53,9 @@ class OpenIncidentForm(FormAction):
 
         return [
             "email",
+            "problem_description",
+            "incident_title",
+            "priority"
             ]
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
@@ -64,7 +66,10 @@ class OpenIncidentForm(FormAction):
             or a list of them, where a first match will be picked"""
 
         return {
-            "email": self.from_entity(entity="email")
+            "email": self.from_entity(entity="email"),
+            "problem_description": self.from_text(intent="inform"),
+            "incident_title": self.from_text(intent="inform"),
+            "priority": self.from_entity(entity="priority")
         }
 
     def validate_email(
@@ -77,8 +82,7 @@ class OpenIncidentForm(FormAction):
         """Validate email is in ticket system."""
 
         caller = email_to_sysid(value)
-        print(f"The results are: {caller}")
-
+        
         if len(caller) == 1:
             # validation succeeded, set the value of the "email" slot to value
             return {"email": value}
@@ -87,6 +91,7 @@ class OpenIncidentForm(FormAction):
             # validation failed, set this slot to None, meaning the
             # user will be asked for the slot again
             return {"email": None}
+
 
     def submit(
         self,
@@ -97,6 +102,35 @@ class OpenIncidentForm(FormAction):
         """Define what the form has to do
             after all required slots are filled"""
 
+        priority = tracker.get_slot("priority")
+        email = tracker.get_slot("email")
+        problem_description = tracker.get_slot("problem_description")
+        incident_title = tracker.get_slot("incident_title")
+
+        incident_req = ''
+        snow_priority = None
+        
+        print(f"The email is: {email}")
+
+        # Check priority and set number value accordingly
+        if priority == 'low':
+            snow_priority = "3"
+        elif priority == 'medium':
+            snow_priority = "2"
+        else:
+            snow_priority = "1"
+        
+        print(f"The snow priority is: {snow_priority}")
+
+        caller = email_to_sysid(email)
+        response = create_incident(
+            description=problem_description, 
+            short_description=incident_title, 
+            priority=snow_priority, 
+            caller=caller[0]['sys_id'])
+        incident_number = response.json()['result']['number']
+        message = "Successfully opened up incident {} for you.  Someone will reach out soon.".format(incident_number)
+
         # utter submit template
-        dispatcher.utter_template("utter_incident_opened", tracker)
+        dispatcher.utter_message(message)
         return []

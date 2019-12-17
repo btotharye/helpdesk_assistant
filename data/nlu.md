@@ -71,3 +71,15 @@
 - abraham.licoln@example.com
 - it is abraham.licoln@example.com
 - abraham.lincolon@example.com
+- I need help resetting my password
+- Reset my password
+- Application won't install
+- my outlook application won't open
+- Application will not open
+- reset my password
+- I need to reset my password
+- [low](priority)
+- [medium](priority)
+- [high](priority)
+- it should be a [low](priority) priority
+- it should be [medium](priority)
