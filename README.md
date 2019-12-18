@@ -27,3 +27,4 @@ Also note how we are setting 3 exports, these are used in the script to connect 
 This will install Rasa X and all the required dependencies.
 
 # Example Conversation Flow
+![Rasa Screenshot](https://github.com/btotharye/helpdesk_assistant/blob/master/screenshots/demo_ss.png)
