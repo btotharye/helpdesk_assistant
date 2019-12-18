@@ -9,24 +9,25 @@ intents:
 - inform
 - open_incident:
     use_entities: []
+- out_of_scope
 entities:
 - email
 - priority
 slots:
   email:
     type: unfeaturized
-  requested_slot:
-    type: unfeaturized
-  problem_description:
-    type: unfeaturized
   incident_title:
     type: unfeaturized
   priority:
     type: categorical
     values:
-      - low
-      - medium
-      - high
+    - low
+    - medium
+    - high
+  problem_description:
+    type: unfeaturized
+  requested_slot:
+    type: unfeaturized
 templates:
   utter_greet:
   - text: Hey! How are you?
@@ -53,6 +54,9 @@ templates:
   - text: Sorry that email isn't in our incident management system.
   utter_incident_opened:
   - text: 'Ok incident has been opened successfully for email: {email}.'
+  out_of_scope:
+  - text: Sorry I don't know how to answer this yet, but I'm learning new things every
+      day.
 actions:
 - utter_greet
 - utter_cheer_up
@@ -61,5 +65,6 @@ actions:
 - utter_goodbye
 - utter_iamabot
 - open_incident_form
+- out_of_scope
 forms:
 - utter_no_email

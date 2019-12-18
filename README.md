@@ -25,3 +25,5 @@ Also note how we are setting 3 exports, these are used in the script to connect 
 `snow_pw` - The password of the service account this action code will use to open a incident.
 
 This will install Rasa X and all the required dependencies.
+
+# Example Conversation Flow
