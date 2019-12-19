@@ -14,6 +14,8 @@ export snow_instance=devxxx.service-now.com
 export snow_user=user
 export snow_pw=password
 
+rasa run actions --actions action
+
 rasa x
 ```
 **You have to deactivate after installation due to tensorflow and other libraries requiring it to start working**
