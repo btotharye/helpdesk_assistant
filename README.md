@@ -14,6 +14,8 @@ export snow_instance=devxxx.service-now.com
 export snow_user=user
 export snow_pw=password
 
+docker run -p 8000:8000 rasa/duckling
+
 rasa run actions --actions action
 
 rasa x
