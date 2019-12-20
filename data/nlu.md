@@ -64,6 +64,7 @@
 - can you help me open a incident please
 - I want to open a new incident
 - I want to open a incident
+- I'm having a weird issue.
 
 ## intent:inform
 - my email is test@example.com
@@ -83,6 +84,8 @@
 - [high](priority)
 - it should be a [low](priority) priority
 - it should be [medium](priority)
+- Cool Demo For GMF
+- Fridge Isn't Running
 
 ## intent:out_of_scope
 - what is the square root of 5

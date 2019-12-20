@@ -3,6 +3,7 @@
 *.db-wal
 *.db
 models/
+results/
 
 # IDE
 .vscode/
