@@ -10,9 +10,9 @@ import requests
 import json
 import os
 
-snow_user = os.getenv("snow_user")
-snow_pw = os.getenv("snow_pw")
-snow_instance = os.getenv("snow_instance")
+snow_user = os.getenv("SNOW_USER")
+snow_pw = os.getenv("SNOW_PW")
+snow_instance = os.getenv("SNOW_INSTANCE")
 
 def email_to_sysid(email):
     lookup_url = 'https://{0}/api/now/table/sys_user?sysparm_limit=1&email={1}'.format(snow_instance,email)
