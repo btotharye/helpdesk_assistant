@@ -47,10 +47,11 @@ You want to modify the section to be updated with the `env_file` and use the exi
 
 See how we update the app service to now have the `env_file` section?  This will bring in our vars from that file and we can use 1 env file to manage all the vars for the services.
 
+
 ```
 app:
     restart: always
-    image: "realbtotharye/helpdesk_action"
+    image: "rasa/rasa-x-demo:${RASA_X_DEMO_VERSION}"
     expose:
       - "5055"
     depends_on:
@@ -59,6 +60,15 @@ app:
      - .env
 ```
 
+**Remember per the Rasa docs you need to create a docker-compose.override.yml file and supply the updated image there**
+
+Example of override:
+```
+version: '3.4'
+services:
+  app:
+    image: realbtotharye/helpdesk_action
+```
 
 # Example Conversation Flow
 ![Rasa Screenshot](https://github.com/btotharye/helpdesk_assistant/blob/master/screenshots/demo_ss.png)
