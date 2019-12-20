@@ -50,7 +50,7 @@ See how we update the app service to now have the `env_file` section?  This will
 ```
 app:
     restart: always
-    image: "rasa/rasa-x-demo:${RASA_X_DEMO_VERSION}"
+    image: "realbtotharye/helpdesk_action"
     expose:
       - "5055"
     depends_on:
